@@ -19,6 +19,11 @@ FacebookWall.Feed = FacebookWall.Collection.extend({
   session: function(session) {
     if (session) this._session = session;
     return this._session;
+  },
+
+  // Returns whether or not the session's user can post to the feed
+  canPost: function() {
+    return true;
   }
 
 })
