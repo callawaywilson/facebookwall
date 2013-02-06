@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Wall Test</title>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/underscore.js"></script>
+    <script type="text/javascript" src="lib/backbone.js"></script>
+    <script type="text/javascript" src="lib/moment.js"></script>
+
+    <script type="text/javascript" src="src/namespace.js"></script>
+    <script type="text/javascript" src="src/base.js"></script>
+    <script type="text/javascript" src="src/feed.js"></script>
+
+    <script type="text/javascript">
+      $.urlParam = function(key){
+        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search); 
+        return result && result[1] || ""; 
+      }
+
+      $(document).ready(function() {
+        feed = new FacebookWall.Feed([], {
+          id: $.urlParam('id'),
+          session: {accessToken: $.urlParam('access_token')}
+        });
+        feed.fetch();
+        feed.on('reset', feed.fetchNext, feed);
+      })
+    </script>
+
+  </head>
+
+  <body>
+
+  </body>
+
+</html>
