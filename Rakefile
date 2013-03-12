@@ -13,7 +13,8 @@ js_files = [
   'src/base_view.js',
   'src/feed_view.js',
   'src/post_view.js',
-  'src/comment_view.js'
+  'src/comment_view.js',
+  'src/spinner.js'
 ]
 
 # Load order of library files:
@@ -31,7 +32,8 @@ js_lib_file = 'app/facebookwall_lib.js'
 
 # Load order of css files:
 css_files = [
-  'css/base.css'
+  'css/base.css',
+  'css/spinner.css'
 ]
 
 # CSS output files:
@@ -109,7 +111,7 @@ def upload_s3(filename, target_filename, bucketname)
     :key => target_filename,
     :public => true, 
     :body => File.open(filename), 
-    :cache_control => "max-age=0"
+    :cache_control => "max-age=1"
   })
   puts "Uploaded #{filename} to S3:#{bucketname}/#{target_filename}"
 end

@@ -36,6 +36,7 @@ FacebookWall = {};
 
           // Facebook embeds results in 'data' field:
           } else if (success) {
+            data.fetched = true;
             success(data, resp, respOptions);
           }
         }

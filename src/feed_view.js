@@ -3,7 +3,7 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   className: '_fbw-feed',
 
   template: _.template(''+
-    '<div class="_fbw-loading" style="display:none">Loading Posts...</div>'+
+    '<div class="_fbw-loading" style="display:none"></div>'+
     '<div class="_fbw-empty" style="display:none">No posts</div>'+
     '<div class="_fbw-post-container" style="display:none">'+
       '<textarea class="fbw-post-textarea" placeholder="Write a post.."></textarea>'+
@@ -40,16 +40,26 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   render: function() {
     this.$el.html(this.template(this.feed));
     this.feed.each(this.add, this);
-    // if (this.feed.size() < 1) this.showEmpty();
+    if (!this.fetched) {
+      this.showLoading();
+    } else if (this.feed.size() < 1) {
+      this.showEmpty();
+    }
     this.updateLoadButton();
     // this.updatePost();
     return this;
   },
 
   reset: function() {
+    this.$el.find("._fbw-loading").hide();
+    this.$el.find("._fbw-empty").hide();
     this.$el.find('._fbw-post-list').empty();
-    this.feed.each(this.add, this);
-    this.updateLoadButton();
+    if (this.feed.size() < 1) {
+      this.showEmpty();
+    } else {
+      this.feed.each(this.add, this);
+      this.updateLoadButton();
+    }
   },
 
   add: function(post) {
@@ -82,7 +92,15 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
     else pc.hide();
   },
 
+  showLoading: function() {
+    this.$el.find("._fbw-loading").show();
+    this.$el.find("._fbw-loading").html("Loading Posts<br/>");
+    this.$el.find("._fbw-loading").append(new FacebookWall.Spinner().render().el);
+    this.$el.find("._fbw-empty").hide();
+  },
+
   showEmpty: function() {
+    this.$el.find("._fbw-loading").hide();
     this.$el.find("._fbw-empty").show();
   },
 
