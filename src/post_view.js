@@ -63,7 +63,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   templatePhoto: _.template(''+
     '<div class="_fbw-post-type-photo">'+
-      '<img src="<%= picUrl("normal") %>"></img>'+
+      '<img src="<%= picUrl("small") %>"></img>'+
     '</div>'
   ),
 

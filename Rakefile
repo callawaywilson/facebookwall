@@ -111,4 +111,5 @@ def upload_s3(filename, target_filename, bucketname)
     :body => File.open(filename), 
     :cache_control => "max-age=0"
   })
+  puts "Uploaded #{filename} to S3:#{bucketname}/#{target_filename}"
 end
