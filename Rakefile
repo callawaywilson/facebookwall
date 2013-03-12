@@ -44,8 +44,8 @@ html_source_file_name = 'html/facebookwall.html'
 html_file_name = 'app/facebookwall.html'
 
 # S3 deployment locations
-s3_html_file_name = 'facebookwall.html'
-s3_bucket = 'hugecity-ios'
+s3_html_file_name = 'ios/facebookwall.html'
+s3_bucket = 'cdn.hugecity.us'
 
 
 #
@@ -111,7 +111,7 @@ def upload_s3(filename, target_filename, bucketname)
     :key => target_filename,
     :public => true, 
     :body => File.open(filename), 
-    :cache_control => "max-age=1"
+    :cache_control => "max-age=360"
   })
   puts "Uploaded #{filename} to S3:#{bucketname}/#{target_filename}"
 end

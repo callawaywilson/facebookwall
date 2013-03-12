@@ -41,7 +41,7 @@
   font-size: 14px;
 }
 ._fbw-post a, ._fbw-post ._fbw-post-link {
-  color: rgb(70, 87, 130);
+  color: #5c9631;
   text-decoration: none;
   cursor: pointer;
 }
@@ -70,7 +70,7 @@
 ._fbw-post ._fbw-post-footer {
   padding: 8px;
   border-top: 1px solid rgba(0,0,0,0.15);
-  background-color: rgb(231, 235, 243);
+  background-color: #e7ece4;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
