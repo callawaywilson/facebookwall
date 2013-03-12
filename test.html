@@ -3,18 +3,30 @@
   <head>
     <title>Facebook Wall Test</title>
     
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/zepto.js"></script>
     <script type="text/javascript" src="lib/underscore.js"></script>
     <script type="text/javascript" src="lib/backbone.js"></script>
     <script type="text/javascript" src="lib/moment.js"></script>
 
-    <script type="text/javascript" src="src/namespace.js"></script>
     <script type="text/javascript" src="src/base.js"></script>
+      
+    <script type="text/javascript" src="src/post.js"></script>
+    <script type="text/javascript" src="src/comment.js"></script>
+    <script type="text/javascript" src="src/like.js"></script>
+
     <script type="text/javascript" src="src/feed.js"></script>
+    
+    <script type="text/javascript" src="src/base_view.js"></script>
+    <script type="text/javascript" src="src/feed_view.js"></script>
+    <script type="text/javascript" src="src/post_view.js"></script>
+    <script type="text/javascript" src="src/comment_view.js"></script>
+
+    <link rel="stylesheet" href="css/base.css" type="text/css" />
+
 
     <script type="text/javascript">
       $.urlParam = function(key){
-        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.search); 
+        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.hash); 
         return result && result[1] || ""; 
       }
 
@@ -23,14 +35,69 @@
           id: $.urlParam('id'),
           session: {accessToken: $.urlParam('access_token')}
         });
-        feed.fetch();
-        feed.on('reset', feed.fetchNext, feed);
+        var feedView = new FacebookWall.FeedView({feed: feed});
+        $("body").html(feedView.render().el);
+        feed.fetch({
+          error: function(model, error) {throw JSON.stringify(error);}
+        });
       })
     </script>
 
   </head>
 
   <body>
+ <!--    <div>
+    <ul class="_fbw-post-list">
+    <li class="_fbw-post">
+      <div class="_fbw-post-header">
+        <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/274985_12800358_4596509_q.jpg"></img>
+        <div class="_fbw-post-from"><a href="#">Adam Wilson</a></div>
+        <div class="_fbw-post-from-details">2 hours ago</div>
+      </div>
+      <div class="_fbw-post-content">
+        Starfucker is the most attended show on Facebook in Atlanta today! Finding events like this on Facebook sucks, so HUGECITY changed put them all on a map. Sign in to see which events your friends are going to. https://www.hugecity.us/events/1339190
+      </div>
+      <div class="_fbw-post-footer">
+        <div class="_fbw-post-controls">
+          <div class="_fbw-post-controls-commands">
+            <span class="_fbw-post-link">Like</span> &sdot;
+            <span class="_fbw-post-link">Comment</span> &sdot;
+            <span class="_fbw-post-link">Share</span>
+          </div>
+          <div class="_fbw-post-controls-views">
+            <span class="_fbw-post-link">3 Likes</span> &sdot;
+            <span class="_fbw-post-link">5 Comments</span>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+        <div class="_fbw-likes">
+          <a href="#">Adam Wilson</a>, <a href="#">Jonathan Nesbitt</a>, <a href="#">Hugh Malkin</a>, <a href="#">John Doe</a>, <a href="#">Hugh Hugecity</a>, and 4 other people like this.
+        </div>
+        <ul class="_fbw-comments">
+          <li>
+            <img src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc6/274985_12800358_4596509_q.jpg"></img>
+            <div class="_fbw-comment-from"><a href="#">Adam Wilson</a></div>
+            <div class="_fbw-comment-content">If you don't adapt, you're already dead.  -Rodney Dangerfield</div>
+            <div class="_fbw-comment-controls"><span class="_fbw-comment-time">5 hours ago &sdot;</span> <a href="#">Like</a></div>
+          </li>
+        </ul>
+        <div class="_fbw-comments-comment">
+          <table border="0" cellpadding="0" cellspacing="0"><tr><td width="100%">
+          <input class="_fbw-comments-comment-input"></input>
+          </td><td width="1%">
+          <button class="_fbw-comments-comment-post">Post</button>
+          </td></tr></table>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+    </div> -->
+
+<!-- 
+    <h1>Feed</h1>
+    <div id="feed-pane" style="border: 1px solid #ccc;width:500px;"></div> -->
+    
 
   </body>
 

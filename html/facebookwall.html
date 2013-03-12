@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      $FACEBOOKWALL_STYLE
+    </style>
+    <script type="text/javascript">
+      $FACEBOOKWALL_JAVASCRIPT
+    </script>
+    <script type="text/javascript">
+      function urlParam(key){
+        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.hash); 
+        return result && result[1] || null; 
+      }
+      $(document).ready(function() {
+        feed = new FacebookWall.Feed([], {
+          id: urlParam('id'),
+          session: {accessToken: urlParam('access_token')}
+        });
+        var feedView = new FacebookWall.FeedView({feed: feed});
+        $("body").html(feedView.render().el);
+        feed.fetch({
+          error: function(model, error) {throw JSON.stringify(error);}
+        });
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

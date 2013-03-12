@@ -1,0 +1,179 @@
+._fbw-feed {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+._fbw-post-list {
+  margin: 0;
+  padding: 0;
+}
+
+._fbw-load-container {
+  text-align: center;
+  margin: 10px;
+}
+
+/*Post Styles*/
+._fbw-post {
+  list-style: none;
+  border-radius: 3px;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.3);
+  margin: 15px;
+  line-height: 20px;
+}
+._fbw-post a, ._fbw-post ._fbw-post-link {
+  color: rgb(70, 87, 130);
+  text-decoration: none;
+  cursor: pointer;
+}
+._fbw-post ._fbw-post-header {
+  padding: 10px 10px 0 10px;
+}
+._fbw-post ._fbw-post-header img {
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+._fbw-post ._fbw-post-header ._fbw-post-from {
+  margin-left: 50px;
+  font-weight: bold;
+}
+._fbw-post ._fbw-post-header ._fbw-post-from-details {
+  margin-left: 50px;
+  color: rgba(0,0,0,0.5);
+  line-height: 20px;
+}
+
+._fbw-post ._fbw-post-content {
+  padding: 10px;
+}
+
+._fbw-post ._fbw-post-footer {
+  padding: 10px;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  background-color: rgb(231, 235, 243);
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+._fbw-post ._fbw-post-footer ._fbw-post-controls-commands {
+  float: left;
+}
+._fbw-post ._fbw-post-footer ._fbw-post-controls-views {
+  float: right;
+}
+
+/*Image Post*/
+._fbw-post-type-photo {
+  margin-top: 5px;
+  border: 1px solid #cccccc;
+  padding: 2px;
+}
+
+._fbw-post-type-photo img {
+  width: 100%;
+}
+
+
+/*Link Post*/
+._fbw-post-type-link {
+  margin-top: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  background-color: #eeeeee;
+  border: 1px solid rgba(0,0,0,0.3);
+  font-size: 14px;
+}
+._fbw-post-type-link ._fbw-post-link-picture {
+  width: 100px;
+  max-height: 100px;
+  float: left;
+}
+._fbw-post-type-link ._fbw-post-link-name {
+  margin-left: 105px;
+  font-weight: bold;
+}
+._fbw-post-type-link ._fbw-post-link-caption {
+  margin-left: 105px;
+  color: rgba(0,0,0,0.5);
+}
+._fbw-post-type-link ._fbw-post-link-description {
+  margin-left: 105px;
+  margin-top: 5px;
+  font-size: 14px;
+  line-height: 16px
+}
+
+
+/*Post Likes*/
+._fbw-likes {
+  border-top: 1px solid white;
+  margin: 10px -10px 0 -10px;
+  padding: 10px 10px 0 10px;
+  line-height: 20px;
+}
+
+
+
+/*Post Comments*/
+._fbw-comments-comment {
+  border-top: 1px solid white;
+  margin: 10px -10px 0 -10px;
+  padding: 10px 10px 0 10px;
+  line-height: 20px;
+  width: 100%;
+}
+
+._fbw-comments-comment-input {
+  height: 25px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-right: none;
+}
+
+._fbw-comments-comment-post {
+  line-height: 20px;
+  width: 60px;
+}
+
+._fbw-comments {
+  margin: 10px 0 0 0;
+  padding: 0;
+  line-height: 20px;
+}
+
+._fbw-comments li {
+  list-style: none;
+  margin: 0 -10px;
+  padding: 10px;
+  border-top: 1px solid white;
+}
+
+._fbw-comments li:last-child {
+  padding-bottom: 0;
+}
+
+._fbw-comments li img {
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+
+._fbw-comments li ._fbw-comment-from {
+  margin-left: 50px;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+._fbw-comments li ._fbw-comment-content {
+  margin-left: 50px;
+}
+
+._fbw-comments li ._fbw-comment-controls {
+  margin-left: 50px;
+}
+
+._fbw-comments li ._fbw-comment-time {
+  color: rgba(0,0,0,0.5);
+}
