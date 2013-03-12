@@ -14,7 +14,7 @@
 
 ._fbw-load-container {
   text-align: center;
-  margin: 10px;
+  margin: 5px;
 }
 
 /*Post Styles*/
@@ -24,8 +24,8 @@
   background-color: #ffffff;
   box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
   border: 1px solid rgba(0,0,0,0.3);
-  margin: 15px;
-  line-height: 20px;
+  margin: 8px;
+  font-size: 14px;
 }
 ._fbw-post a, ._fbw-post ._fbw-post-link {
   color: rgb(70, 87, 130);
@@ -37,25 +37,25 @@
 }
 ._fbw-post ._fbw-post-header img {
   float: left;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 }
 ._fbw-post ._fbw-post-header ._fbw-post-from {
-  margin-left: 50px;
+  margin-left: 45px;
   font-weight: bold;
 }
 ._fbw-post ._fbw-post-header ._fbw-post-from-details {
-  margin-left: 50px;
+  margin-left: 45px;
   color: rgba(0,0,0,0.5);
   line-height: 20px;
 }
 
 ._fbw-post ._fbw-post-content {
-  padding: 10px;
+  padding: 8px;
 }
 
 ._fbw-post ._fbw-post-footer {
-  padding: 10px;
+  padding: 8px;
   border-top: 1px solid rgba(0,0,0,0.15);
   background-color: rgb(231, 235, 243);
   border-bottom-right-radius: 3px;
@@ -70,6 +70,7 @@
 
 /*Image Post*/
 ._fbw-post-type-photo {
+  text-align: center;
 }
 
 ._fbw-post-type-photo img {
@@ -78,6 +79,7 @@
   border: 1px solid #cccccc;
   padding: 3px;
   max-width: 100%;
+  box-sizing: border-box;
 }
 
 
@@ -88,7 +90,7 @@
   border-radius: 3px;
   background-color: #eeeeee;
   border: 1px solid rgba(0,0,0,0.3);
-  font-size: 14px;
+  font-size: 12px;
 }
 ._fbw-post-type-link ._fbw-post-link-picture {
   width: 100px;
@@ -106,17 +108,17 @@
 ._fbw-post-type-link ._fbw-post-link-description {
   margin-left: 105px;
   margin-top: 5px;
-  font-size: 14px;
-  line-height: 16px
+  font-size: 12px;
+  line-height: 14px
 }
 
 
 /*Post Likes*/
 ._fbw-likes {
   border-top: 1px solid white;
-  margin: 10px -10px 0 -10px;
+  margin: 10px -8px 0 -8px;
   padding: 10px 10px 0 10px;
-  line-height: 20px;
+  line-height: 16px;
 }
 
 
@@ -124,9 +126,9 @@
 /*Post Comments*/
 ._fbw-comments-comment {
   border-top: 1px solid white;
-  margin: 10px -10px 0 -10px;
+  margin: 10px -8px 0 -8px;
   padding: 10px 10px 0 10px;
-  line-height: 20px;
+  line-height: 16px;
   width: 100%;
 }
 
@@ -139,7 +141,7 @@
 }
 
 ._fbw-comments-comment-post {
-  line-height: 20px;
+  line-height: 16px;
   width: 60px;
 }
 
@@ -151,7 +153,7 @@
 
 ._fbw-comments li {
   list-style: none;
-  margin: 0 -10px;
+  margin: 0 -8px;
   padding: 10px;
   border-top: 1px solid white;
 }

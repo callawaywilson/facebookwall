@@ -109,6 +109,6 @@ def upload_s3(filename, target_filename, bucketname)
     :key => target_filename,
     :public => true, 
     :body => File.open(filename), 
-    :cache_control => "max-age=60"
+    :cache_control => "max-age=0"
   })
 end
