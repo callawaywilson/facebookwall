@@ -32,6 +32,16 @@ FacebookWall.Post = FacebookWall.Model.extend({
 
   fromUrl: function() {
   	return this.fbUrl(this.get('from').id);
+  },
+
+  picUrl: function(type) {
+    if (type == 'normal') {
+      return this.get('picture').replace("_s.jpg", "_q.jpg");
+    } else if (type == 'large') {
+      return this.get('picture').replace("_s.jpg", "_n.jpg");
+    } else {
+      return this.get('picture');
+    }
   }
 
 });

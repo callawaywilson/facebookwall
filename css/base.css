@@ -1,5 +1,10 @@
+@font-face {
+  font-family: "Flama-Book";
+  src: local("Flama-Book");
+}
+
 ._fbw-feed {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Flama-Book", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 ._fbw-post-list {
@@ -65,13 +70,14 @@
 
 /*Image Post*/
 ._fbw-post-type-photo {
-  margin-top: 5px;
-  border: 1px solid #cccccc;
-  padding: 2px;
 }
 
 ._fbw-post-type-photo img {
-  width: 100%;
+  margin-top: 5px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  padding: 3px;
+  max-width: 100%;
 }
 
 

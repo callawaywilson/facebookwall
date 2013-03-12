@@ -62,15 +62,16 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   ),
 
   templatePhoto: _.template(''+
-    '<div class="_fbw-post-photo">'+
-      '<img src="<%= get("photo") %>"></img>'+
+    '<div class="_fbw-post-type-photo">'+
+      '<img src="<%= picUrl("normal") %>"></img>'+
     '</div>'
   ),
 
   events: {
     'click ._fbw-show-comments': 'showComments',
     'click ._fbw-show-likes': 'showLikes',
-    'click ._fbw-show-reply': 'showReply'
+    'click ._fbw-show-reply': 'showReply',
+    'click ._fbw-post-type-photo img': 'loadLargePicture'
   },
 
   initialize: function(options) {
@@ -89,6 +90,11 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
       content.append(this.templateLink(this.post));
     }
     return this;
+  },
+
+  loadLargePicture: function() {
+    var url = this.post.picUrl('large');
+    this.$el.find('._fbw-post-type-photo img').attr('src', url);
   },
 
   showReply: function() {

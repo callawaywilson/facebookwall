@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'uglifier'
+require 'fog'
+require 'yaml'
 
 # Load order of javascript files:
 js_files = [
@@ -50,6 +52,7 @@ s3_bucket = 'hugecity-ios'
 
 desc "deploy the build artifacts to S3"
 task :deploy => [:build] do
+  upload_s3 html_file_name, s3_html_file_name, s3_bucket
 end
 
 desc "build the project, javascript, css, and html"
@@ -89,4 +92,23 @@ task :build_css do
   css = css_files.map{|f| File.read f }.join(';')
   css.gsub! "\n", ""
   File.open(css_file, 'w') {|f| f.write css }
+end
+
+#
+# Helpers
+#
+def upload_s3(filename, target_filename, bucketname)
+  config = YAML.load_file('amazon.yml')
+  connection = Fog::Storage.new({
+    :provider                 => 'AWS',
+    :aws_secret_access_key    => config['aws_secret_access_key'],
+    :aws_access_key_id        => config['aws_access_key_id']
+  })
+  directory = connection.directories.get(bucketname)
+  directory.files.create({
+    :key => target_filename,
+    :public => true, 
+    :body => File.open(filename), 
+    :cache_control => "max-age=60"
+  })
 end
