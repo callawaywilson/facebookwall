@@ -1,11 +1,30 @@
 FacebookWall.Comment = FacebookWall.Model.extend({
 
-  fromPicUrl: function(type) {
-    return this.fbPicUrl(this.get('from').id, type);
+  name: function() {
+    if (this.isMe())
+      return "You";
+    else
+      return this.get('from').name;
   },
 
-  fromUrl: function() {
-    return this.fbUrl(this.get('from').id);
+  isMe: function() {
+    return this.session() && this.session().userID == this.get('from').id;
+  },
+
+  like: function() {
+    var self = this;
+    this.fbLike({
+      type: 'like',
+      success: function() {self.set('user_likes', true);}
+    });
+  },
+
+  unlike: function() {
+    var self = this;
+    this.fbLike({
+      type: 'unlike',
+      success: function() {self.set('user_likes', false);}
+    });
   }
-  
-})
+
+});

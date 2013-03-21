@@ -81,7 +81,6 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
     this.$el.find('._fbw-loading-segment').hide();
     this.$el.find('._fbw-load-segment').show();
     var lc = this.$el.find("._fbw-load-container");
-    console.log(this.feed.hasNext())
     if (this.feed.hasNext()) lc.show();
     else lc.hide();
   },

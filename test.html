@@ -24,20 +24,26 @@
 
     <link rel="stylesheet" href="css/base.css" type="text/css" />
     <link rel="stylesheet" href="css/spinner.css" type="text/css" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
     <script type="text/javascript">
-      $.urlParam = function(key){
+      var urlParam = function(key){
         var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.hash); 
         return result && result[1] || ""; 
       }
 
       $(document).ready(function() {
         feed = new FacebookWall.Feed([], {
-          id: $.urlParam('id'),
-          session: {accessToken: $.urlParam('access_token')}
+          id: urlParam('id'),
+          can_post: urlParam('can_post'),
+          session: {
+            accessToken: urlParam('access_token'),
+            userID: urlParam('user_id')
+          }
         });
-        var feedView = new FacebookWall.FeedView({feed: feed});
+        feedView = new FacebookWall.FeedView({feed: feed});
         $("body").html(feedView.render().el);
         feed.fetch({
           error: function(model, error) {throw JSON.stringify(error);}
