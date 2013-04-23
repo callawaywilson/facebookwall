@@ -2,12 +2,12 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "facebookwall"
-  s.version     = "0.0.1"
+  s.version     = "0.0.2"
   s.authors     = ["Adam Wilson"]
   s.homepage    = "https://github.com/hugecity/facebookwall"
   s.summary     = "A Backbone.js based embeddable facebook wall."
   s.description = <<-EOF
-    Facebookwall-rails provides a simple to embed Backbone.js-based facebook feed widget.
+    Facebookwall provides a simple to embed Backbone.js-based facebook feed widget.
   EOF
 
   s.files = Dir["{lib,app}/**/*"] + ["README.md"]
