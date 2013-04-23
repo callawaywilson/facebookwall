@@ -379,12 +379,12 @@ FacebookWall.BaseView = Backbone.View.extend({
 
 FacebookWall.FeedView = FacebookWall.BaseView.extend({
 
-  className: '_fbw-feed',
+  className: 'fbw-feed',
 
   template: _.template(''+
-    '<div class="_fbw-loading" style="display:none"></div>'+
-    '<div class="_fbw-empty" style="display:none">No posts</div>'+
-    '<div class="_fbw-post-container" style="display:none">'+
+    '<div class="fbw-loading" style="display:none"></div>'+
+    '<div class="fbw-empty" style="display:none">No posts</div>'+
+    '<div class="fbw-post-container" style="display:none">'+
       '<textarea class="fbw-post-textarea" placeholder="Write a post.."></textarea>'+
       '<div class="fbw-post-feed-controls" style="display:none">'+
         '<button class="btn btn-success post-feed-button">Post</button>'+
@@ -394,18 +394,18 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
         '</button>'+
       '</div>'+
     '</div>'+
-    '<ul class="_fbw-post-list"></ul>'+
-    '<div class="_fbw-load-container">'+
-      '<button class="_fbw-load-segment">Load more posts</button>'+
-      '<button class="_fbw-loading-segment" disabled="true" style="display:none">'+
+    '<ul class="fbw-post-list"></ul>'+
+    '<div class="fbw-load-container">'+
+      '<button class="fbw-load-segment">Load more posts</button>'+
+      '<button class="fbw-loading-segment" disabled="true" style="display:none">'+
         'Loading posts'+
       '</button>'+
     '</div>'
   ),
 
   events: {
-    "focusin ._fbw-post-textarea": "showPostControls",
-    'click ._fbw-load-segment': 'loadNext'
+    "focusin .fbw-post-textarea": "showPostControls",
+    'click .fbw-load-segment': 'loadNext'
   },
 
   initialize: function(options) {
@@ -430,9 +430,9 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   },
 
   reset: function() {
-    this.$el.find("._fbw-loading").hide();
-    this.$el.find("._fbw-empty").hide();
-    this.$el.find('._fbw-post-list').empty();
+    this.$el.find(".fbw-loading").hide();
+    this.$el.find(".fbw-empty").hide();
+    this.$el.find('.fbw-post-list').empty();
     if (this.feed.size() < 1) {
       this.showEmpty();
     } else {
@@ -443,7 +443,7 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
 
   add: function(post) {
     var li = new FacebookWall.PostView({post: post});
-    this.$el.find('._fbw-post-list').append(li.render().el);
+    this.$el.find('.fbw-post-list').append(li.render().el);
   },
 
   loadNext: function() {
@@ -452,39 +452,39 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   },
 
   updateLoadingButton: function() {
-    this.$el.find('._fbw-loading-segment').show();
-    this.$el.find('._fbw-load-segment').hide();
+    this.$el.find('.fbw-loading-segment').show();
+    this.$el.find('.fbw-load-segment').hide();
   },
 
   updateLoadButton: function() {
-    this.$el.find('._fbw-loading-segment').hide();
-    this.$el.find('._fbw-load-segment').show();
-    var lc = this.$el.find("._fbw-load-container");
+    this.$el.find('.fbw-loading-segment').hide();
+    this.$el.find('.fbw-load-segment').show();
+    var lc = this.$el.find(".fbw-load-container");
     if (this.feed.hasNext()) lc.show();
     else lc.hide();
   },
 
   updatePost: function() {
-    var pc = this.$el.find("._fbw-post-container");
+    var pc = this.$el.find(".fbw-post-container");
     if (this.feed.canPost()) pc.show();
     else pc.hide();
   },
 
   showLoading: function() {
-    this.$el.find("._fbw-loading").show();
-    this.$el.find("._fbw-loading").html("Loading Posts<br/>");
-    this.$el.find("._fbw-loading").append(new FacebookWall.Spinner().render().el);
-    this.$el.find("._fbw-empty").hide();
+    this.$el.find(".fbw-loading").show();
+    this.$el.find(".fbw-loading").html("Loading Posts<br/>");
+    this.$el.find(".fbw-loading").append(new FacebookWall.Spinner().render().el);
+    this.$el.find(".fbw-empty").hide();
   },
 
   showEmpty: function() {
-    this.$el.find("._fbw-loading").hide();
-    this.$el.find("._fbw-empty").show();
+    this.$el.find(".fbw-loading").hide();
+    this.$el.find(".fbw-empty").show();
   },
 
   showPostControls: function() {
-    this.$el.find("._fbw-post-textarea").addClass('focused');
-    this.$el.find("._fbw-post-feed-controls").show();
+    this.$el.find(".fbw-post-textarea").addClass('focused');
+    this.$el.find(".fbw-post-feed-controls").show();
   }
 
 })
@@ -494,48 +494,48 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   maxLikes: 4,
 
   tagName:    'li',
-  className:  '_fbw-post', 
+  className:  'fbw-post', 
 
   showingLikes: false,
   showingComments: false,
 
   template: _.template(''+
-      '<div class="_fbw-post-header">'+
+      '<div class="fbw-post-header">'+
         '<img src="<%= fromPicUrl("square") %>"></img>'+
-        '<div class="_fbw-post-from"><a href="<%= fromUrl() %>"><%= get("from").name %></a></div>'+
-        '<div class="_fbw-post-from-details"><%= formatDateTime(get("created_time")) %></div>'+
+        '<div class="fbw-post-from"><a href="<%= fromUrl() %>"><%= get("from").name %></a></div>'+
+        '<div class="fbw-post-from-details"><%= formatDateTime(get("created_time")) %></div>'+
       '</div>'+
-      '<div class="_fbw-post-content">'+
+      '<div class="fbw-post-content">'+
         '<% if (get("message")) {%><%= linkify(get("message")) %><% } %>'+
       '</div>'+
-      '<div class="_fbw-post-footer">'+
-        '<div class="_fbw-post-controls">'+
-          '<div class="_fbw-post-controls-commands">'+
-            '<span class="_fbw-post-link _fbw-btn-like-post"></span> &sdot; '+
-            '<span class="_fbw-post-link _fbw-btn-comment-post">Comment</span>'+
+      '<div class="fbw-post-footer">'+
+        '<div class="fbw-post-controls">'+
+          '<div class="fbw-post-controls-commands">'+
+            '<span class="fbw-post-link fbw-btn-like-post"></span> &sdot; '+
+            '<span class="fbw-post-link fbw-btn-comment-post">Comment</span>'+
           '</div>'+
-          '<div class="_fbw-post-controls-views">'+
+          '<div class="fbw-post-controls-views">'+
             '<% if (get("likesCount") > 0) { %>'+
-              '<a href="javascript:void(0)" class="_fbw-show-likes _fbw-post-link">'+
+              '<a href="javascript:void(0)" class="fbw-show-likes fbw-post-link">'+
                 '<%= get("likesCount") %> Like<%if (get("likesCount") != 1) { %>s<%}%>'+
               '</a>  '+
             '<% } %>'+
             '<% if (get("commentsCount") > 0) { %>'+
-              '&nbsp;<a href="javascript:void(0)" class="_fbw-show-comments _fbw-post-link">'+
+              '&nbsp;<a href="javascript:void(0)" class="fbw-show-comments fbw-post-link">'+
                 '<%= get("commentsCount") %> Comment<%if (get("commentsCount") != 1) { %>s<%}%>'+
               '</a>'+
             '<% } %>'+
           '</div>'+
           '<div style="clear:both;"></div>'+
         '</div>'+
-        '<div class="_fbw-likes" style="display:none;"></div>'+
-        '<ul class="_fbw-comments" style="display:none;"></ul>'+
-        '<div class="_fbw-comments-comment" style="display:none;">'+
-          '<form class="_fbw-comments-comment-form">'+
+        '<div class="fbw-likes" style="display:none;"></div>'+
+        '<ul class="fbw-comments" style="display:none;"></ul>'+
+        '<div class="fbw-comments-comment" style="display:none;">'+
+          '<form class="fbw-comments-comment-form">'+
           '<table border="0" cellpadding="0" cellspacing="0"><tr><td width="100%">'+
-            '<input class="_fbw-comments-comment-input"></input>'+
+            '<input class="fbw-comments-comment-input"></input>'+
             '</td><td width="1%">'+
-            '<button class="_fbw-comments-comment-post" type="submit">Post</button>'+
+            '<button class="fbw-comments-comment-post" type="submit">Post</button>'+
           '</td></tr></table>'+
           '</form>'+
         '</div>'+
@@ -544,32 +544,32 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   ),
 
   templateLink: _.template(''+
-    '<div class="_fbw-post-type-link">'+
+    '<div class="fbw-post-type-link">'+
       '<a href="<%= get("link") %>" target="_blank">'+
-        '<img class="_fbw-post-link-picture" src="<%= get("picture") %>"></img>'+
+        '<img class="fbw-post-link-picture" src="<%= get("picture") %>"></img>'+
       '</a>'+
-      '<div class="_fbw-post-link-name">'+
+      '<div class="fbw-post-link-name">'+
         '<a href="<%= get("link") %>" target="_blank"><%= get("name") %></a>'+
       '</div>'+
-      '<div class="_fbw-post-link-caption"><%= get("caption") %></div>'+
-      '<div class="_fbw-post-link-description"><%= get("description") %></div>'+
+      '<div class="fbw-post-link-caption"><%= get("caption") %></div>'+
+      '<div class="fbw-post-link-description"><%= get("description") %></div>'+
       '<div style="clear:both;"></div>'+
     '</div>'
   ),
 
   templatePhoto: _.template(''+
-    '<div class="_fbw-post-type-photo">'+
-      '<img class="_fbw-thumbnail" src="<%= picUrl("normal") %>"></img>'+
+    '<div class="fbw-post-type-photo">'+
+      '<img class="fbw-thumbnail" src="<%= picUrl("normal") %>"></img>'+
     '</div>'
   ),
 
   events: {
-    'click ._fbw-show-comments': 'toggleComments',
-    'click ._fbw-show-likes': 'showLikes',
-    'click ._fbw-post-type-photo img': 'loadLargePicture',
-    'click ._fbw-btn-like-post': 'like',
-    'click ._fbw-btn-comment-post': 'showComment',
-    'submit ._fbw-comments-comment-form': 'comment'
+    'click .fbw-show-comments': 'toggleComments',
+    'click .fbw-show-likes': 'showLikes',
+    'click .fbw-post-type-photo img': 'loadLargePicture',
+    'click .fbw-btn-like-post': 'like',
+    'click .fbw-btn-comment-post': 'showComment',
+    'submit .fbw-comments-comment-form': 'comment'
   },
 
   initialize: function(options) {
@@ -581,7 +581,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   render: function() {
     this.$el.html(this.template(this.post));
-    var content = this.$("._fbw-post-content");
+    var content = this.$(".fbw-post-content");
     if (this.post.get('type') == "link") {
       content.append(this.templateLink(this.post));
     } else if (this.post.get('type') == "photo") {
@@ -596,13 +596,13 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   },
 
   renderLikeButton: function() {
-    this.$('._fbw-btn-like-post').html(this.post.isLiked() ? 'Unlike' : 'Like');
+    this.$('.fbw-btn-like-post').html(this.post.isLiked() ? 'Unlike' : 'Like');
   },
 
   loadLargePicture: function() {
     var url = this.post.picUrl('large');
-    this.$('._fbw-post-type-photo ._fbw-thumbnail').attr('src', url);
-    this.$('._fbw-post-type-photo ._fbw-thumbnail').removeClass('_fbw-thumbnail');
+    this.$('.fbw-post-type-photo .fbw-thumbnail').attr('src', url);
+    this.$('.fbw-post-type-photo .fbw-thumbnail').removeClass('fbw-thumbnail');
   },
 
   like: function() {
@@ -615,14 +615,14 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   showLikes: function() {
     if (this.showingLikes) {
       this.showingLikes = false;
-      this.$('._fbw-likes').hide();
+      this.$('.fbw-likes').hide();
     } else {
       this.showingLikes = true;
       var count = this.post.get('likesCount');
       var likes = this.post.get('likes').models;
       var length = this.post.get('likes').length;
       if (length < 1) return; // Don't show if no likes.
-      var likeEl = this.$('._fbw-likes');
+      var likeEl = this.$('.fbw-likes');
       var html = '';
       for (var i = 0; i < length && i < this.maxLikes; i++) {
         html += '<a href="' + likes[i].fbUrl() + '">' + likes[i].name() + '</a>';
@@ -646,7 +646,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   showComment: function() {
     if (!this.showingComments) this.showComments();
-    this.$('._fbw-comments-comment-input').focus();
+    this.$('.fbw-comments-comment-input').focus();
   },
 
   toggleComments: function() {
@@ -659,30 +659,30 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   showComments: function() {
     this.showingComments = true;
-    this.$('._fbw-comments').empty();
-    this.$('._fbw-comments').show();
+    this.$('.fbw-comments').empty();
+    this.$('.fbw-comments').show();
     this.post.get('comments').each(this.addComment, this);
-    this.$('._fbw-comments-comment').show();
-    this.$('._fbw-comments-comment-post').removeAttr('disabled');
+    this.$('.fbw-comments-comment').show();
+    this.$('.fbw-comments-comment-post').removeAttr('disabled');
   },
 
   hideComments: function() {
     this.showingComments = false;
-    this.$('._fbw-comments').hide();
-    this.$('._fbw-comments-comment').hide();
+    this.$('.fbw-comments').hide();
+    this.$('.fbw-comments-comment').hide();
   },
 
   addComment: function(comment) {
     var cv = new FacebookWall.CommentView({comment: comment});
-    this.$('._fbw-comments').append(cv.render().el);
+    this.$('.fbw-comments').append(cv.render().el);
   },
 
   comment: function(e) {
     e.preventDefault();
     try {
-      var text = this.$('._fbw-comments-comment-input').val();
+      var text = this.$('.fbw-comments-comment-input').val();
       if (text && !/^\s*$/.test(text)) {
-        this.$('._fbw-comments-comment-post').attr('disabled', true);
+        this.$('.fbw-comments-comment-post').attr('disabled', true);
         this.post.comment(text);
       }
     } catch (err) {
@@ -699,26 +699,26 @@ FacebookWall.CommentView = FacebookWall.BaseView.extend({
 
 	template: _.template(''+
     '<img src="<%= fromPicUrl("square") %>"></img>'+
-    '<div class="_fbw-comment-from">'+
+    '<div class="fbw-comment-from">'+
       '<a href="<%= fromUrl() %>"><%= name() %></a>'+
     '</div>'+
-    '<div class="_fbw-comment-content"><%= get("message") %></div>'+
-    ' <div class="_fbw-comment-controls">'+
-      '<span class="_fbw-comment-time">'+
+    '<div class="fbw-comment-content"><%= get("message") %></div>'+
+    ' <div class="fbw-comment-controls">'+
+      '<span class="fbw-comment-time">'+
         '<%= formatDateTime(get("created_time")) %>'+
         // ' &sdot; '+
       '</span> '+
       // '<% if (get("user_likes")) { %>'+
-      //   '<a class="_fbw-comment-unlike" href="javascript:void(0)">Unlike</a>'+
+      //   '<a class="fbw-comment-unlike" href="javascript:void(0)">Unlike</a>'+
       // '<% } else { %>'+
-      //   '<a class="_fbw-comment-like" href="javascript:void(0)">Like</a>'+
+      //   '<a class="fbw-comment-like" href="javascript:void(0)">Like</a>'+
       // '<% } %>'+
     '</div>'
   ),
 
   events: {
-    'click ._fbw-comment-like': 'like',
-    'click ._fbw-comment-unlike': 'unlike'
+    'click .fbw-comment-like': 'like',
+    'click .fbw-comment-unlike': 'unlike'
   },
 
   initialize: function(options) {
@@ -744,10 +744,10 @@ FacebookWall.CommentView = FacebookWall.BaseView.extend({
 
 FacebookWall.Spinner = Backbone.View.extend({
 
-  className: '_fbw-spinner ',
+  className: 'fbw-spinner ',
 
   render: function() {
-    this.$el.html('<div class="_fbw-bar1"></div><div class="_fbw-bar2"></div><div class="_fbw-bar3"></div><div class="_fbw-bar4"></div><div class="_fbw-bar5"></div><div class="_fbw-bar6"></div><div class="_fbw-bar7"></div><div class="_fbw-bar8"></div><div class="_fbw-bar9"></div><div class="_fbw-bar10"></div><div class="_fbw-bar11"></div><div class="_fbw-bar12"></div>')
+    this.$el.html('<div class="fbw-bar1"></div><div class="fbw-bar2"></div><div class="fbw-bar3"></div><div class="fbw-bar4"></div><div class="fbw-bar5"></div><div class="fbw-bar6"></div><div class="fbw-bar7"></div><div class="fbw-bar8"></div><div class="fbw-bar9"></div><div class="fbw-bar10"></div><div class="fbw-bar11"></div><div class="fbw-bar12"></div>')
     return this;
   }
 })

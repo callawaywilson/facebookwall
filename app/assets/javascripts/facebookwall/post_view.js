@@ -3,48 +3,48 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   maxLikes: 4,
 
   tagName:    'li',
-  className:  '_fbw-post', 
+  className:  'fbw-post', 
 
   showingLikes: false,
   showingComments: false,
 
   template: _.template(''+
-      '<div class="_fbw-post-header">'+
+      '<div class="fbw-post-header">'+
         '<img src="<%= fromPicUrl("square") %>"></img>'+
-        '<div class="_fbw-post-from"><a href="<%= fromUrl() %>"><%= get("from").name %></a></div>'+
-        '<div class="_fbw-post-from-details"><%= formatDateTime(get("created_time")) %></div>'+
+        '<div class="fbw-post-from"><a href="<%= fromUrl() %>"><%= get("from").name %></a></div>'+
+        '<div class="fbw-post-from-details"><%= formatDateTime(get("created_time")) %></div>'+
       '</div>'+
-      '<div class="_fbw-post-content">'+
+      '<div class="fbw-post-content">'+
         '<% if (get("message")) {%><%= linkify(get("message")) %><% } %>'+
       '</div>'+
-      '<div class="_fbw-post-footer">'+
-        '<div class="_fbw-post-controls">'+
-          '<div class="_fbw-post-controls-commands">'+
-            '<span class="_fbw-post-link _fbw-btn-like-post"></span> &sdot; '+
-            '<span class="_fbw-post-link _fbw-btn-comment-post">Comment</span>'+
+      '<div class="fbw-post-footer">'+
+        '<div class="fbw-post-controls">'+
+          '<div class="fbw-post-controls-commands">'+
+            '<span class="fbw-post-link fbw-btn-like-post"></span> &sdot; '+
+            '<span class="fbw-post-link fbw-btn-comment-post">Comment</span>'+
           '</div>'+
-          '<div class="_fbw-post-controls-views">'+
+          '<div class="fbw-post-controls-views">'+
             '<% if (get("likesCount") > 0) { %>'+
-              '<a href="javascript:void(0)" class="_fbw-show-likes _fbw-post-link">'+
+              '<a href="javascript:void(0)" class="fbw-show-likes fbw-post-link">'+
                 '<%= get("likesCount") %> Like<%if (get("likesCount") != 1) { %>s<%}%>'+
               '</a>  '+
             '<% } %>'+
             '<% if (get("commentsCount") > 0) { %>'+
-              '&nbsp;<a href="javascript:void(0)" class="_fbw-show-comments _fbw-post-link">'+
+              '&nbsp;<a href="javascript:void(0)" class="fbw-show-comments fbw-post-link">'+
                 '<%= get("commentsCount") %> Comment<%if (get("commentsCount") != 1) { %>s<%}%>'+
               '</a>'+
             '<% } %>'+
           '</div>'+
           '<div style="clear:both;"></div>'+
         '</div>'+
-        '<div class="_fbw-likes" style="display:none;"></div>'+
-        '<ul class="_fbw-comments" style="display:none;"></ul>'+
-        '<div class="_fbw-comments-comment" style="display:none;">'+
-          '<form class="_fbw-comments-comment-form">'+
+        '<div class="fbw-likes" style="display:none;"></div>'+
+        '<ul class="fbw-comments" style="display:none;"></ul>'+
+        '<div class="fbw-comments-comment" style="display:none;">'+
+          '<form class="fbw-comments-comment-form">'+
           '<table border="0" cellpadding="0" cellspacing="0"><tr><td width="100%">'+
-            '<input class="_fbw-comments-comment-input"></input>'+
+            '<input class="fbw-comments-comment-input"></input>'+
             '</td><td width="1%">'+
-            '<button class="_fbw-comments-comment-post" type="submit">Post</button>'+
+            '<button class="fbw-comments-comment-post" type="submit">Post</button>'+
           '</td></tr></table>'+
           '</form>'+
         '</div>'+
@@ -53,32 +53,32 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   ),
 
   templateLink: _.template(''+
-    '<div class="_fbw-post-type-link">'+
+    '<div class="fbw-post-type-link">'+
       '<a href="<%= get("link") %>" target="_blank">'+
-        '<img class="_fbw-post-link-picture" src="<%= get("picture") %>"></img>'+
+        '<img class="fbw-post-link-picture" src="<%= get("picture") %>"></img>'+
       '</a>'+
-      '<div class="_fbw-post-link-name">'+
+      '<div class="fbw-post-link-name">'+
         '<a href="<%= get("link") %>" target="_blank"><%= get("name") %></a>'+
       '</div>'+
-      '<div class="_fbw-post-link-caption"><%= get("caption") %></div>'+
-      '<div class="_fbw-post-link-description"><%= get("description") %></div>'+
+      '<div class="fbw-post-link-caption"><%= get("caption") %></div>'+
+      '<div class="fbw-post-link-description"><%= get("description") %></div>'+
       '<div style="clear:both;"></div>'+
     '</div>'
   ),
 
   templatePhoto: _.template(''+
-    '<div class="_fbw-post-type-photo">'+
-      '<img class="_fbw-thumbnail" src="<%= picUrl("normal") %>"></img>'+
+    '<div class="fbw-post-type-photo">'+
+      '<img class="fbw-thumbnail" src="<%= picUrl("normal") %>"></img>'+
     '</div>'
   ),
 
   events: {
-    'click ._fbw-show-comments': 'toggleComments',
-    'click ._fbw-show-likes': 'showLikes',
-    'click ._fbw-post-type-photo img': 'loadLargePicture',
-    'click ._fbw-btn-like-post': 'like',
-    'click ._fbw-btn-comment-post': 'showComment',
-    'submit ._fbw-comments-comment-form': 'comment'
+    'click .fbw-show-comments': 'toggleComments',
+    'click .fbw-show-likes': 'showLikes',
+    'click .fbw-post-type-photo img': 'loadLargePicture',
+    'click .fbw-btn-like-post': 'like',
+    'click .fbw-btn-comment-post': 'showComment',
+    'submit .fbw-comments-comment-form': 'comment'
   },
 
   initialize: function(options) {
@@ -90,7 +90,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   render: function() {
     this.$el.html(this.template(this.post));
-    var content = this.$("._fbw-post-content");
+    var content = this.$(".fbw-post-content");
     if (this.post.get('type') == "link") {
       content.append(this.templateLink(this.post));
     } else if (this.post.get('type') == "photo") {
@@ -105,13 +105,13 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   },
 
   renderLikeButton: function() {
-    this.$('._fbw-btn-like-post').html(this.post.isLiked() ? 'Unlike' : 'Like');
+    this.$('.fbw-btn-like-post').html(this.post.isLiked() ? 'Unlike' : 'Like');
   },
 
   loadLargePicture: function() {
     var url = this.post.picUrl('large');
-    this.$('._fbw-post-type-photo ._fbw-thumbnail').attr('src', url);
-    this.$('._fbw-post-type-photo ._fbw-thumbnail').removeClass('_fbw-thumbnail');
+    this.$('.fbw-post-type-photo .fbw-thumbnail').attr('src', url);
+    this.$('.fbw-post-type-photo .fbw-thumbnail').removeClass('fbw-thumbnail');
   },
 
   like: function() {
@@ -124,14 +124,14 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   showLikes: function() {
     if (this.showingLikes) {
       this.showingLikes = false;
-      this.$('._fbw-likes').hide();
+      this.$('.fbw-likes').hide();
     } else {
       this.showingLikes = true;
       var count = this.post.get('likesCount');
       var likes = this.post.get('likes').models;
       var length = this.post.get('likes').length;
       if (length < 1) return; // Don't show if no likes.
-      var likeEl = this.$('._fbw-likes');
+      var likeEl = this.$('.fbw-likes');
       var html = '';
       for (var i = 0; i < length && i < this.maxLikes; i++) {
         html += '<a href="' + likes[i].fbUrl() + '">' + likes[i].name() + '</a>';
@@ -155,7 +155,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   showComment: function() {
     if (!this.showingComments) this.showComments();
-    this.$('._fbw-comments-comment-input').focus();
+    this.$('.fbw-comments-comment-input').focus();
   },
 
   toggleComments: function() {
@@ -168,30 +168,30 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   showComments: function() {
     this.showingComments = true;
-    this.$('._fbw-comments').empty();
-    this.$('._fbw-comments').show();
+    this.$('.fbw-comments').empty();
+    this.$('.fbw-comments').show();
     this.post.get('comments').each(this.addComment, this);
-    this.$('._fbw-comments-comment').show();
-    this.$('._fbw-comments-comment-post').removeAttr('disabled');
+    this.$('.fbw-comments-comment').show();
+    this.$('.fbw-comments-comment-post').removeAttr('disabled');
   },
 
   hideComments: function() {
     this.showingComments = false;
-    this.$('._fbw-comments').hide();
-    this.$('._fbw-comments-comment').hide();
+    this.$('.fbw-comments').hide();
+    this.$('.fbw-comments-comment').hide();
   },
 
   addComment: function(comment) {
     var cv = new FacebookWall.CommentView({comment: comment});
-    this.$('._fbw-comments').append(cv.render().el);
+    this.$('.fbw-comments').append(cv.render().el);
   },
 
   comment: function(e) {
     e.preventDefault();
     try {
-      var text = this.$('._fbw-comments-comment-input').val();
+      var text = this.$('.fbw-comments-comment-input').val();
       if (text && !/^\s*$/.test(text)) {
-        this.$('._fbw-comments-comment-post').attr('disabled', true);
+        this.$('.fbw-comments-comment-post').attr('disabled', true);
         this.post.comment(text);
       }
     } catch (err) {
