@@ -53,7 +53,7 @@
   box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
   border: 1px solid rgba(0,0,0,0.3);
   margin: 8px;
-  font-size: 14px;
+  font-size: 13px;
   overflow-x: hidden;
 }
 .fbw-feed .fbw-post a, .fbw-feed .fbw-post .fbw-post-link {
@@ -171,7 +171,7 @@
   height: 30px;
   width: 100%;
   padding-left: 5px;
-  font-size: 14px;
+  font-size: 13px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-right: none;
@@ -233,7 +233,7 @@
   display: inline-block;
   padding: 4px 12px;
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
   color: #333333;
   text-align: center;
