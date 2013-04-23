@@ -4,48 +4,52 @@ require 'fog'
 require 'yaml'
 
 # Load order of javascript files:
+js_file_root = "app/assets/javascripts/facebookwall/" 
 js_files = [
-  'app/assets/javascripts/base.js',
-  'app/assets/javascripts/post.js',
-  'app/assets/javascripts/comment.js',
-  'app/assets/javascripts/like.js',
-  'app/assets/javascripts/feed.js',
-  'app/assets/javascripts/base_view.js',
-  'app/assets/javascripts/feed_view.js',
-  'app/assets/javascripts/post_view.js',
-  'app/assets/javascripts/comment_view.js',
-  'app/assets/javascripts/spinner.js'
+  "#{js_file_root}/base.js",
+  "#{js_file_root}/post.js",
+  "#{js_file_root}/comment.js",
+  "#{js_file_root}/like.js",
+  "#{js_file_root}/feed.js",
+  "#{js_file_root}/base_view.js",
+  "#{js_file_root}/feed_view.js",
+  "#{js_file_root}/post_view.js",
+  "#{js_file_root}/comment_view.js",
+  "#{js_file_root}/spinner.js"
 ]
 
 # Load order of library files:
+lib_file_root = "app/assets/lib"
 lib_files = [
-  'app/assets/lib/zepto.js',
-  'app/assets/lib/underscore.js',
-  'app/assets/lib/backbone.js',
-  'app/assets/lib/moment.js',
+  "#{lib_file_root}/zepto.js",
+  "#{lib_file_root}/underscore.js",
+  "#{lib_file_root}/backbone.js",
+  "#{lib_file_root}/moment.js",
 ]
 
 # Javascript output files:
-js_file     = 'facebookwall.js'
-js_app_file = 'facebookwall_app.js'
-js_lib_file = 'facebookwall_lib.js'
+js_file     = "facebookwall.js"
+js_app_file = "facebookwall_app.js"
+js_lib_file = "facebookwall_lib.js"
+js_rails_file = "app/assets/javascripts/facebookwall.js"
 
 # Load order of css files:
 css_files = [
-  'app/assets/css/base.css',
-  'app/assets/css/spinner.css'
+  "app/assets/css/facebookwall/base.css",
+  "app/assets/css/facebookwall/spinner.css"
 ]
 
 # CSS output files:
-css_file = 'facebookwall.css'
+css_file = "facebookwall.css"
+css_rails_file = "app/assets/css/facebookwall.css"
 
 # Html files
-html_source_file_name = 'app/assets/html/facebookwall.html'
-html_file_name = 'facebookwall.html'
+html_source_file_name = "app/assets/html/facebookwall.html"
+html_file_name = "facebookwall.html"
 
 # S3 deployment locations
-s3_html_file_name = 'ios/facebookwall.html'
-s3_bucket = 'cdn.hugecity.us'
+s3_html_file_name = "ios/facebookwall.html"
+s3_bucket = "cdn.hugecity.us"
 
 
 #
@@ -59,6 +63,14 @@ end
 
 desc "build the project, javascript, css, and html"
 task :build => [:build_js, :build_css, :build_html] do
+end
+
+desc "build the files for the rails gem"
+task :build_rails do 
+  js = js_files.map{|f| File.read f }.join("\n\n")
+  File.open(js_rails_file, 'w') {|f| f.write js }
+  css = css_files.map{|f| File.read f }.join(';')
+  File.open(css_rails_file, 'w') {|f| f.write css }
 end
 
 desc "build the embeddable html file" 
