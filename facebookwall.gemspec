@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
     Facebookwall-rails provides a simple to embed Backbone.js-based facebook feed widget.
   EOF
 
-  # s.files = Dir["{lib,vendor}/**/*"] + ["README.md"]
+  s.files = Dir["{lib,app}/**/*"] + ["README.md"]
   # s.test_files = Dir["test/**/*"]
 
   s.add_dependency "railties", ">= 3.1"
