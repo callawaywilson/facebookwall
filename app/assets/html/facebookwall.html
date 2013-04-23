@@ -17,7 +17,7 @@
         feed = new FacebookWall.Feed([], {
           id: urlParam('id'),
           can_post: urlParam('can_post'),
-          session: {accessToken: urlParam('access_token')}
+          session: {accessToken: urlParam('access_token'), userID: urlParam('user_id')}
         });
         var feedView = new FacebookWall.FeedView({feed: feed});
         $("body").html(feedView.render().el);

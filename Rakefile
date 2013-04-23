@@ -5,43 +5,43 @@ require 'yaml'
 
 # Load order of javascript files:
 js_files = [
-  'src/base.js',
-  'src/post.js',
-  'src/comment.js',
-  'src/like.js',
-  'src/feed.js',
-  'src/base_view.js',
-  'src/feed_view.js',
-  'src/post_view.js',
-  'src/comment_view.js',
-  'src/spinner.js'
+  'app/assets/javascripts/base.js',
+  'app/assets/javascripts/post.js',
+  'app/assets/javascripts/comment.js',
+  'app/assets/javascripts/like.js',
+  'app/assets/javascripts/feed.js',
+  'app/assets/javascripts/base_view.js',
+  'app/assets/javascripts/feed_view.js',
+  'app/assets/javascripts/post_view.js',
+  'app/assets/javascripts/comment_view.js',
+  'app/assets/javascripts/spinner.js'
 ]
 
 # Load order of library files:
 lib_files = [
-  'lib/zepto.js',
-  'lib/underscore.js',
-  'lib/backbone.js',
-  'lib/moment.js',
+  'app/assets/lib/zepto.js',
+  'app/assets/lib/underscore.js',
+  'app/assets/lib/backbone.js',
+  'app/assets/lib/moment.js',
 ]
 
 # Javascript output files:
-js_file     = 'app/facebookwall.js'
-js_app_file = 'app/facebookwall_app.js'
-js_lib_file = 'app/facebookwall_lib.js'
+js_file     = 'facebookwall.js'
+js_app_file = 'facebookwall_app.js'
+js_lib_file = 'facebookwall_lib.js'
 
 # Load order of css files:
 css_files = [
-  'css/base.css',
-  'css/spinner.css'
+  'app/assets/css/base.css',
+  'app/assets/css/spinner.css'
 ]
 
 # CSS output files:
-css_file = 'app/facebookwall.css'
+css_file = 'facebookwall.css'
 
 # Html files
-html_source_file_name = 'html/facebookwall.html'
-html_file_name = 'app/facebookwall.html'
+html_source_file_name = 'app/assets/html/facebookwall.html'
+html_file_name = 'facebookwall.html'
 
 # S3 deployment locations
 s3_html_file_name = 'ios/facebookwall.html'
