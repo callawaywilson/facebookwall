@@ -69,8 +69,9 @@ end
 
 desc "build full, minified javascript file (includes backbone components & libraries)"
 task :build_js_full do
-  js = lib_files.map{|f| File.read f }.join("\n\n")
-  js << js_files.map{|f| File.read f }.join("\n\n")
+  js = lib_files.map{|f| File.read f }.join(";\n")
+  js << ";\n"
+  js << js_files.map{|f| File.read f }.join("\n")
   js = Uglifier.compile js
   File.open(js_full_file, 'w') {|f| f.write js }
 end
