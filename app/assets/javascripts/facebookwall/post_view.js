@@ -19,10 +19,10 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
       '</div>'+
       '<div class="fbw-post-footer">'+
         '<div class="fbw-post-controls">'+
-          '<div class="fbw-post-controls-commands">'+
-            '<span class="fbw-post-link fbw-btn-like-post"></span> &sdot; '+
-            '<span class="fbw-post-link fbw-btn-comment-post">Comment</span>'+
-          '</div>'+
+          // '<div class="fbw-post-controls-commands">'+
+          //   '<span class="fbw-post-link fbw-btn-like-post"></span> &sdot; '+
+          //   '<span class="fbw-post-link fbw-btn-comment-post">Comment</span>'+
+          // '</div>'+
           '<div class="fbw-post-controls-views">'+
             '<% if (get("likesCount") > 0) { %>'+
               '<a href="javascript:void(0)" class="fbw-show-likes fbw-post-link">'+
