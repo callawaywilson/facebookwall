@@ -6,7 +6,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
   className:  'fbw-post', 
 
   showingLikes: false,
-  showingComments: false,
+  showingComments: true,
 
   template: _.template(''+
       '<div class="fbw-post-header">'+
@@ -17,35 +17,31 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
       '<div class="fbw-post-content">'+
         '<% if (get("message")) {%><%= linkify(get("message")) %><% } %>'+
       '</div>'+
-      '<div class="fbw-post-footer">'+
-        '<div class="fbw-post-controls">'+
-          // '<div class="fbw-post-controls-commands">'+
-          //   '<span class="fbw-post-link fbw-btn-like-post"></span> &sdot; '+
-          //   '<span class="fbw-post-link fbw-btn-comment-post">Comment</span>'+
-          // '</div>'+
-          '<div class="fbw-post-controls-views">'+
-            '<% if (get("likesCount") > 0) { %>'+
-              '<a href="javascript:void(0)" class="fbw-show-likes fbw-post-link">'+
-                '<%= get("likesCount") %> Like<%if (get("likesCount") != 1) { %>s<%}%>'+
-              '</a>  '+
-            '<% } %>'+
-            '<% if (get("commentsCount") > 0) { %>'+
-              '&nbsp;<a href="javascript:void(0)" class="fbw-show-comments fbw-post-link">'+
-                '<%= get("commentsCount") %> Comment<%if (get("commentsCount") != 1) { %>s<%}%>'+
-              '</a>'+
-            '<% } %>'+
-          '</div>'+
-          '<div style="clear:both;"></div>'+
+      '<div class="fbw-post-controls">'+
+        '<div class="fbw-post-controls-commands">'+
+          '<span class="fbw-btn-like-post"></span> &sdot; '+
+          '<span class="fbw-btn-comment-post">Comment</span>'+
         '</div>'+
-        '<div class="fbw-likes" style="display:none;"></div>'+
+        '<% if (get("likesCount") > 0) { %>'+
+          '<div class="fbw-likes">'+
+            '<a href="#"><%= get("likesCount") %>'+
+            '<%= get("likesCount") > 1 ? " people</a> like this" : " person</a> likes this" %>'+
+          '</div>'+
+        '<% } %>'+
+        '<div style="clear:both;"></div>'+
+      '</div>'+
+      '<div class="fbw-post-footer">'+
         '<ul class="fbw-comments" style="display:none;"></ul>'+
         '<div class="fbw-comments-comment" style="display:none;">'+
           '<form class="fbw-comments-comment-form">'+
-          '<table border="0" cellpadding="0" cellspacing="0"><tr><td width="100%">'+
-            '<input class="fbw-comments-comment-input"></input>'+
-            '</td><td width="1%">'+
-            '<button class="fbw-comments-comment-post" type="submit">Post</button>'+
-          '</td></tr></table>'+
+            '<table><tr>'+
+            '<td width="1%">'+
+            '<img src="http://graph.facebook.com/<%= session().userID %>/picture?type=square" class="fbw-user-thumb">'+
+            '</td>'+
+            '<td width="99%">'+
+            '<input class="fbw-comments-comment-input" placeholder="Write a comment"></input>'+
+            '</td>'+
+            '</tr></td></table>'+
           '</form>'+
         '</div>'+
       '</div>'+
@@ -54,14 +50,18 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
 
   templateLink: _.template(''+
     '<div class="fbw-post-type-link">'+
-      '<a href="<%= get("link") %>" target="_blank">'+
-        '<img class="fbw-post-link-picture" src="<%= get("picture") %>"></img>'+
+      '<a href="<%= linkAttributes().url %>" target="_blank">'+
+        '<img class="fbw-post-link-picture" src="<%= linkAttributes().picture %>"></img>'+
       '</a>'+
-      '<div class="fbw-post-link-name">'+
-        '<a href="<%= get("link") %>" target="_blank"><%= get("name") %></a>'+
+      '<div class="fbw-post-link-title">'+
+        '<a href="<%= linkAttributes().url %>" target="_blank"><%= linkAttributes().title %></a>'+
       '</div>'+
-      '<div class="fbw-post-link-caption"><%= get("caption") %></div>'+
-      '<div class="fbw-post-link-description"><%= get("description") %></div>'+
+      '<div class="fbw-post-link-description"><%= linkAttributes().description %></div>'+
+      '<div class="fbw-post-link-caption">'+
+        '<a href="<%= linkAttributes().url %>" target="_blank">'+
+          '<%= linkAttributes().caption %>'+
+        '</a>'+
+      '</div>'+
       '<div style="clear:both;"></div>'+
     '</div>'
   ),
@@ -72,10 +72,24 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
     '</div>'
   ),
 
+  templateVideo: _.template(''+
+    '<div class="fbw-post-type-video">'+
+      '<a href="<%= get("link") %>" target="_blank">'+
+        '<img class="fbw-thumbnail fbw-open-video" src="<%= picUrl("normal") %>"></img>'+
+      '</a>'+
+    '</div>'
+  ),
+
+  // templateVideoPayer: _.template(''+
+  //   '<iframe src="https://www.facebook.com/video/embed?video_id=<%= linkedId() %>"'+
+  //   ' frameborder="0"></iframe>'
+  // ),
+
   events: {
     'click .fbw-show-comments': 'toggleComments',
     'click .fbw-show-likes': 'showLikes',
-    'click .fbw-post-type-photo img': 'loadLargePicture',
+    'click .fbw-post-type-video .fbw-open-video': 'openVideo',
+    'click .fbw-post-type-photo img': 'togglePicture',
     'click .fbw-btn-like-post': 'like',
     'click .fbw-btn-comment-post': 'showComment',
     'submit .fbw-comments-comment-form': 'comment'
@@ -96,7 +110,7 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
     } else if (this.post.get('type') == "photo") {
       content.append(this.templatePhoto(this.post));
     } else if (this.post.get('type') == "video") {
-      content.append(this.templateLink(this.post));
+      content.append(this.templateVideo(this.post));
     }
     if (this.showingLikes) this.showLikes();
     if (this.showingComments) this.showComments();
@@ -108,10 +122,22 @@ FacebookWall.PostView = FacebookWall.BaseView.extend({
     this.$('.fbw-btn-like-post').html(this.post.isLiked() ? 'Unlike' : 'Like');
   },
 
-  loadLargePicture: function() {
-    var url = this.post.picUrl('large');
-    this.$('.fbw-post-type-photo .fbw-thumbnail').attr('src', url);
-    this.$('.fbw-post-type-photo .fbw-thumbnail').removeClass('fbw-thumbnail');
+  togglePicture: function() {
+    if (this.isShowingLargePicture) {
+      var url = this.post.picUrl('normal');
+      this.$('.fbw-post-type-photo img').attr('src', url);
+      this.$('.fbw-post-type-photo img').addClass('fbw-thumbnail');
+      this.isShowingLargePicture = false;
+    } else {
+      var url = this.post.picUrl('large');
+      this.$('.fbw-post-type-photo img').attr('src', url);
+      this.$('.fbw-post-type-photo img').removeClass('fbw-thumbnail');
+      this.isShowingLargePicture = true;
+    }
+  },
+
+  openVideo: function() {
+    this.$(".fbw-post-type-video").html(this.templateVideoPayer(this.post));
   },
 
   like: function() {

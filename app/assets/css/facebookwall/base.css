@@ -3,6 +3,48 @@
   margin-bottom: 10px;
 }
 
+.fbw-feed img {
+  max-width: none;
+}
+
+.fbw-feed ul, .fbw-feed li {
+  font-size: inherit;
+}
+
+.fbw-feed table, .fbw-feed caption, .fbw-feed tbody, .fbw-feed tfoot, .fbw-feed thead, .fbw-feed tr, .fbw-feed th, .fbw-feed td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: middle;
+    background: transparent;
+}
+
+.fbw-feed .fbw-user-thumb {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+} 
+
+.fbw-feed .fbw-newpost-container {
+  margin: 8px;
+}
+
+.fbw-feed .fbw-newpost-container .fbw-newpost-form {
+
+}
+
+.fbw-feed .fbw-newpost-container .fbw-newpost-form input {
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+  font-size: 13px;
+  box-sizing: border-box;
+  border: 1px solid rgb(220, 222, 227);
+}
+
+
 .fbw-feed .fbw-btn-link {
   cursor: pointer;
   border-color: transparent;
@@ -43,10 +85,12 @@
 /*Post Styles*/
 .fbw-feed .fbw-post {
   list-style: none;
-  border-radius: 3px;
+  /*border-radius: 2px;*/
   background-color: #ffffff;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
-  border: 1px solid rgba(0,0,0,0.3);
+  /*box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+  border: 1px solid rgba(0,0,0,0.3);*/
+  border: 1px solid;
+  border-color: #e5e6e9 #dfe0e4 #d0d1d5;
   margin: 8px;
   font-size: 13px;
   overflow-x: hidden;
@@ -78,18 +122,29 @@
   padding: 8px;
 }
 
-.fbw-feed .fbw-post .fbw-post-footer {
-  padding: 8px;
+.fbw-feed .fbw-post .fbw-post-controls {
   border-top: 1px solid rgba(0,0,0,0.15);
-  background-color: #edeff4;
+  padding: 6px;
+  margin: 0 6px;
+}
+.fbw-feed .fbw-post .fbw-post-controls .fbw-post-controls-commands {
+  float: left;
+  font-weight: bold;
+  color: #7f7f7f;
+  cursor: pointer;
+}
+.fbw-feed .fbw-post .fbw-post-controls .fbw-post-controls-views {
+  float: right;
+}
+
+.fbw-feed .fbw-post .fbw-post-footer {
+  padding: 0 8px 8px 8px;
+  border-top: 1px solid rgba(0,0,0,0.15);
+  background-color: #f6f7f8;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-}
-.fbw-feed .fbw-post .fbw-post-footer .fbw-post-controls-commands {
-  float: left;
-}
-.fbw-feed .fbw-post .fbw-post-footer .fbw-post-controls-views {
-  float: right;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 /*Image Post*/
@@ -108,7 +163,28 @@
 }
 
 .fbw-feed .fbw-post-type-photo img.fbw-thumbnail {
-  max-width: 100px !important;
+  max-width: 160px !important;
+  margin: 10px;
+}
+
+/*Video Post*/
+.fbw-feed .fbw-post-type-video {
+  text-align: center;
+}
+
+.fbw-feed .fbw-post-type-video img {
+  margin-top: 5px;
+  border-radius: 3px;
+  border: 1px solid #cccccc;
+  padding: 3px;
+  max-width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.fbw-feed .fbw-post-type-video img.fbw-thumbnail {
+  max-width: 160px !important;
+  margin: 10px;
 }
 
 
@@ -116,9 +192,9 @@
 .fbw-feed .fbw-post-type-link {
   margin-top: 5px;
   padding: 5px;
-  border-radius: 3px;
-  background-color: #eeeeee;
-  border: 1px solid rgba(0,0,0,0.3);
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: #f9f9f9;
   font-size: 12px;
   overflow-x: hidden;
 }
@@ -127,51 +203,47 @@
   max-height: 100px;
   float: left;
 }
-.fbw-feed .fbw-post-type-link .fbw-post-link-name {
+.fbw-feed .fbw-post-type-link .fbw-post-link-title {
   margin-left: 105px;
+  font-size: 125%;
+  line-height: 135%;
   font-weight: bold;
 }
 .fbw-feed .fbw-post-type-link .fbw-post-link-caption {
   margin-left: 105px;
   color: rgba(0,0,0,0.5);
+  text-transform: uppercase;
 }
 .fbw-feed .fbw-post-type-link .fbw-post-link-description {
   margin-left: 105px;
   margin-top: 5px;
-  font-size: 12px;
-  line-height: 14px
+  margin-bottom: 5px;
 }
 
 
 /*Post Likes*/
 .fbw-feed .fbw-likes {
-  border-top: 1px solid white;
+  /*border-top: 1px solid white;
   margin: 10px -8px 0 -8px;
   padding: 10px 10px 0 10px;
-  line-height: 16px;
+  line-height: 16px;*/
+  float: right;
 }
 
 
 
 /*Post Comments*/
 .fbw-feed .fbw-comments-comment {
-  border-top: 1px solid white;
-  margin: 10px -8px 0 -8px;
-  padding: 10px 10px 0 10px;
-  line-height: 16px;
-  width: 100%;
+  margin-top: 8px;
 }
 
 .fbw-feed .fbw-comments-comment-input {
   height: 30px;
   width: 100%;
-  padding-left: 5px;
+  padding: 5px;
   font-size: 13px;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-right: none;
-  border-top-right-radius: 0 !important;
-  border-bottom-right-radius: 0 !important;
+  border: 1px solid rgb(220, 222, 227);
 }
 
 .fbw-feed .fbw-comments-comment-post {
@@ -182,16 +254,13 @@
 }
 
 .fbw-feed .fbw-comments {
-  margin: 10px 0 0 0;
   padding: 0;
-  line-height: 20px;
 }
 
 .fbw-feed .fbw-comments li {
   list-style: none;
   margin: 0 -8px;
   padding: 6px 10px;
-  border-top: 1px solid white;
 }
 
 .fbw-feed .fbw-comments li:last-child {

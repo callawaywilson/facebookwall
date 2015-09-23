@@ -1,7 +1,9 @@
 FacebookWall.Feed = FacebookWall.Collection.extend({
 
   model: FacebookWall.Post,
-
+  defaultParams: {
+    "fields": "attachments,comments.summary(true),likes.summary(true),picture,full_picture,from,message,privacy,type,created_time,updated_time,is_hidden,is_expired,link,caption"
+  },
   url: function() {return this.urlRoot + "/" + this.id + "/feed"},
 
   initialize: function(models, options) {

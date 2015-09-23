@@ -1,8 +1,13 @@
-FacebookWall.Post = FacebookWall.Model.extend({
+  FacebookWall.Post = FacebookWall.Model.extend({
 
   parse: function(resp) {
+    // Parse Comments
     var comments = [];
-    resp.commentsCount = resp.comments ? resp.comments.count : 0;
+    if (resp.comments && resp.comments.summary && resp.comments.summary.total_count) {
+      resp.commentsCount = resp.comments.summary.total_count;
+    } else {
+      resp.commentsCount = 0;
+    }
     if (resp.comments && resp.comments.data) {
       comments = _.map(resp.comments.data, function(comment) {
         return new FacebookWall.Comment(comment);
@@ -13,8 +18,13 @@ FacebookWall.Post = FacebookWall.Model.extend({
     });
     resp.comments.session(this.session());
 
+    // Parse Likes
     var likes = [];
-    resp.likesCount = resp.likes ? resp.likes.count : 0;
+    if (resp.likes && resp.likes.summary && resp.likes.summary.total_count) {
+      resp.likesCount = resp.likes.summary.total_count;
+    } else {
+      resp.likesCount = 0;
+    }
     if (resp.likes && resp.likes.data) {
       likes = _.map(resp.likes.data, function(like) {
         return new FacebookWall.Like(like);

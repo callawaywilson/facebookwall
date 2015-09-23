@@ -3,18 +3,20 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   className: 'fbw-feed',
 
   template: _.template(''+
+    '<div class="fbw-newpost-container" style="display:none">'+
+      '<form class="fbw-newpost-form">'+
+        '<table><tr>'+
+        '<td width="1%">'+
+        '<img src="http://graph.facebook.com/<%= session().userID %>/picture?type=square" class="fbw-user-thumb">'+
+        '</td>'+
+        '<td width="99%">'+
+        '<input class="fbw-post-input" placeholder="Write a post..."></input>'+
+        '</td>'+
+        '</tr></td></table>'+
+      '</form>'+
+    '</div>'+
     '<div class="fbw-loading" style="display:none"></div>'+
     '<div class="fbw-empty" style="display:none">No posts</div>'+
-    '<div class="fbw-post-container" style="display:none">'+
-      '<textarea class="fbw-post-textarea" placeholder="Write a post.."></textarea>'+
-      '<div class="fbw-post-feed-controls" style="display:none">'+
-        '<button class="btn btn-success post-feed-button">Post</button>'+
-        '<button class="btn btn-success disabled posting-feed-button" style="display:none">'+
-          '<img class="fb_spinner"></img>'+
-          'Posting'+
-        '</button>'+
-      '</div>'+
-    '</div>'+
     '<ul class="fbw-post-list"></ul>'+
     '<div class="fbw-load-container">'+
       '<button class="fbw-load-segment">Load more posts</button>'+
@@ -25,7 +27,6 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   ),
 
   events: {
-    "focusin .fbw-post-textarea": "showPostControls",
     'click .fbw-load-segment': 'loadNext'
   },
 
@@ -45,8 +46,8 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
     } else if (this.feed.size() < 1) {
       this.showEmpty();
     }
+    this.updatePost();
     this.updateLoadButton();
-    // this.updatePost();
     return this;
   },
 
@@ -86,7 +87,7 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   },
 
   updatePost: function() {
-    var pc = this.$el.find(".fbw-post-container");
+    var pc = this.$el.find(".fbw-newpost-container");
     if (this.feed.canPost()) pc.show();
     else pc.hide();
   },
@@ -101,11 +102,6 @@ FacebookWall.FeedView = FacebookWall.BaseView.extend({
   showEmpty: function() {
     this.$el.find(".fbw-loading").hide();
     this.$el.find(".fbw-empty").show();
-  },
-
-  showPostControls: function() {
-    this.$el.find(".fbw-post-textarea").addClass('focused');
-    this.$el.find(".fbw-post-feed-controls").show();
   }
 
 })

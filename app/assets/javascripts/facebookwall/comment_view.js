@@ -11,13 +11,13 @@ FacebookWall.CommentView = FacebookWall.BaseView.extend({
     ' <div class="fbw-comment-controls">'+
       '<span class="fbw-comment-time">'+
         '<%= formatDateTime(get("created_time")) %>'+
-        // ' &sdot; '+
+        ' &sdot; '+
       '</span> '+
-      // '<% if (get("user_likes")) { %>'+
-      //   '<a class="fbw-comment-unlike" href="javascript:void(0)">Unlike</a>'+
-      // '<% } else { %>'+
-      //   '<a class="fbw-comment-like" href="javascript:void(0)">Like</a>'+
-      // '<% } %>'+
+      '<% if (get("user_likes")) { %>'+
+        '<a class="fbw-comment-unlike" href="javascript:void(0)">Unlike</a>'+
+      '<% } else { %>'+
+        '<a class="fbw-comment-like" href="javascript:void(0)">Like</a>'+
+      '<% } %>'+
     '</div>'
   ),
 

@@ -10,7 +10,7 @@ FacebookWall = {};
   //Shared Methods for Model & Collection
   var shared = {
 
-    urlRoot: 'https://graph.facebook.com',
+    urlRoot: 'https://graph.facebook.com/v2.4',
 
     url: function() {return this.urlRoot + "/" + this.id},
     urlLike: function() {return this.url() + "/likes"},
@@ -24,6 +24,9 @@ FacebookWall = {};
       options.data = _.extend(options.data, {
         access_token: this.session().accessToken
       });
+      if (this.defaultParams) {
+        options.data = _.extend(this.defaultParams, options.data);
+      }
 
       var success = options.success;
       var error = options.error;
@@ -164,9 +167,9 @@ FacebookWall = {};
 
     picUrl: function(type) {
       if (type == 'normal') {
-        return this.get('picture').replace("_s.jpg", "_q.jpg");
+        return this.get('picture');
       } else if (type == 'large') {
-        return this.get('picture').replace("_s.jpg", "_n.jpg");
+        return this.get('full_picture');
       } else {
         return this.get('picture');
       }
@@ -197,6 +200,30 @@ FacebookWall = {};
         success: options.success,
         error: options.error
       });
+    },
+
+    linkedId: function() {
+      var parts = this.get('link').split("/");
+      return parts[parts.length - 1];
+    },
+
+    linkAttributes: function() {
+      var attr = {};
+      if (this.get('attachments') && this.get('attachments').data) {
+        for (var i = 0; i < this.get('attachments').data.length; i++) {
+          var data = this.get('attachments').data[i];
+          if (data.type == 'share') {
+            attr = {
+              title: data.title,
+              description: data.description,
+              url: data.url,
+              picture: this.get('picture'),
+              caption: this.get('caption') 
+            }
+          }
+        }
+      }
+      return attr;
     }
 
   }));

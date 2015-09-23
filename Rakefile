@@ -25,10 +25,18 @@ lib_files = [
   "#{lib_file_root}/moment.js",
 ]
 
+# Load order of embed files:
+embed_files = [
+  "#{lib_file_root}/underscore.js",
+  "#{lib_file_root}/backbone.js",
+  "#{lib_file_root}/moment.js",
+]
+
 # Javascript output files:
 js_file       = "fbw.js"
 js_min_file   = "fbw.min.js"
 js_full_file  = "fbw_full.min.js"
+js_embed_file  = "fbw_embed.min.js"
 js_rails_file = "app/assets/javascripts/facebookwall.js"
 
 # Load order of css files:
@@ -74,6 +82,15 @@ task :build_js_full do
   js << js_files.map{|f| File.read f }.join("\n")
   js = Uglifier.compile js
   File.open(js_full_file, 'w') {|f| f.write js }
+end
+
+desc "build embeddable version, without zepto but with backbone and moment"
+task :build_embed do
+  js = embed_files.map{|f| File.read f }.join(";\n")
+  js << ";\n"
+  js << js_files.map{|f| File.read f }.join("\n")
+  js = Uglifier.compile js
+  File.open(js_embed_file, 'w') {|f| f.write js }
 end
 
 desc "build css"
