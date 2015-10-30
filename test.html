@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facebook Wall Test</title>
+    
+    <script type="text/javascript" src="app/assets/lib/zepto.js"></script>
+    <script type="text/javascript" src="app/assets/lib/underscore.js"></script>
+    <script type="text/javascript" src="app/assets/lib/backbone.js"></script>
+    <script type="text/javascript" src="app/assets/lib/moment.js"></script>
+
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall/base.js"></script>
+      
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//post.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//comment.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//like.js"></script>
+
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//feed.js"></script>
+    
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//base_view.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//feed_view.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//post_view.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//comment_view.js"></script>
+    <script type="text/javascript" src="app/assets/javascripts/facebookwall//spinner.js"></script>
+
+    <!--<script type="text/javascript" src="fbw_full.min.js"></script>-->
+
+    <link rel="stylesheet" href="app/assets/css/facebookwall/base.css" type="text/css" />
+    <link rel="stylesheet" href="app/assets/css/facebookwall/spinner.css" type="text/css" />
+    <link rel="stylesheet" href="app/assets/css/facebookwall/playbutton.css" type="text/css" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <script type="text/javascript">
+      var urlParam = function(key){
+        var result = new RegExp(key + "=([^&]*)", "i").exec(window.location.hash); 
+        return result && result[1] || ""; 
+      }
+
+      $(document).ready(function() {
+        feed = new FacebookWall.Feed([], {
+          id: urlParam('id'),
+          can_post: urlParam('can_post'),
+          session: {
+            accessToken: urlParam('access_token'),
+            userID: urlParam('user_id')
+          }
+        });
+        feedView = new FacebookWall.FeedView({feed: feed});
+        $("body").append(feedView.render().el);
+        feed.fetch({
+          error: function(model, error) {throw JSON.stringify(error);}
+        });
+      })
+    </script>
+
+    <script>window.fbAsyncInit = function() {
+    FB.init({
+        appId      : '834650053293112',
+        xfbml      : true,
+        version    : 'v2.4'
+    });
+    }; (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  </head>
+
+  <body style="margin:0;padding:0; max-width:500px;">
+  </body>
+
+</html>
